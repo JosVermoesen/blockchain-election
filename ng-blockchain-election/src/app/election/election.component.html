@@ -1,0 +1,15 @@
+<br>
+<div class="card border-0">
+  <div class="card-header">
+    <h5 class="card-title">{{ candidateName }}</h5>
+    <div class="election-image">
+      <img [src]="candidateImage" />
+    </div>
+    <div class="card-body">
+      <div class="d-flex justify-content-between">
+        <small class="text-muted">Votes: {{ numberOfVotes }}</small>
+        <!-- <small *ngIf="voted" class="badge">voted</small> -->
+      </div>
+    </div>
+  </div>
+</div>

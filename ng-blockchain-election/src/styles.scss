@@ -1,0 +1,51 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootswatch/dist/sandstone/bootstrap.min.css";
+/* You can add global styles to this file, and also import other style files */
+
+// @import "../node_modules/bootswatch/dist/cosmo/bootstrap.min.css";
+// @import "../node_modules/bootswatch/dist/darkly/bootstrap.min.css";
+// @import "../node_modules/bootswatch/dist/flatly/bootstrap.min.css";
+// @import "../node_modules/bootswatch/dist/journal/bootstrap.min.css";
+// @import "../node_modules/bootswatch/dist/litera/bootstrap.min.css";
+// @import "../node_modules/bootswatch/dist/lumen/bootstrap.min.css";
+// @import "../node_modules/bootswatch/dist/lux/bootstrap.min.css";
+// @import "../node_modules/bootswatch/dist/materia/bootstrap.min.css";
+// @import "../node_modules/bootswatch/dist/minty/bootstrap.min.css";
+// @import "../node_modules/bootswatch/dist/pulse/bootstrap.min.css";
+@import "../node_modules/bootswatch/dist/sandstone/bootstrap.min.css";
+
+// Or use variables, e.g.:
+// $h1-font-size: 3rem;
+// @import "../node_modules/bootswatch/dist/[theme]/variables";
+// @import "../node_modules/bootstrap/scss/bootstrap";
+// @import "../node_modules/bootswatch/dist/[theme]/bootswatch";
+
+/* Importing Bootstrap SCSS file. */
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+// @import "../node_modules/bootswatch/dist/simplex/bootstrap.min.css";
+// @import "../node_modules/bootswatch/dist/sketchy/bootstrap.min.css";
+// @import "../node_modules/bootswatch/dist/slate/bootstrap.min.css";
+// @import "../node_modules/bootswatch/dist/solar/bootstrap.min.css";
+// @import "../node_modules/bootswatch/dist/spacelab/bootstrap.min.css";
+// @import "../node_modules/bootswatch/dist/superhero/bootstrap.min.css";
+// @import "../node_modules/bootswatch/dist/united/bootstrap.min.css";
+// @import "../node_modules/bootswatch/dist/yeti/bootstrap.min.css";
+
+/* Bootstrap small */
+/* html {
+  font-size: 14px;
+} */
+
+// for a cool purple scroll bar
+body::-webkit-scrollbar {
+  width: 0.4rem;
+}
+
+body::-webkit-scrollbar-track {
+  background: #1e1e24;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #6649b8;
+}

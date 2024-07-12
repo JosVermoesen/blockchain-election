@@ -1,0 +1,52 @@
+{
+  "name": "ng-blockchain-election",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^18.0.5",
+    "@angular/common": "^18.0.5",
+    "@angular/compiler": "^18.0.5",
+    "@angular/core": "^18.0.5",
+    "@angular/forms": "^18.0.5",
+    "@angular/platform-browser": "^18.0.5",
+    "@angular/platform-browser-dynamic": "^18.0.5",
+    "@angular/router": "^18.0.5",
+    "@types/ws": "^8.5.4",
+    "apexcharts": "^3.49.2",
+    "assert": "^2.1.0",
+    "bootstrap": "^5.3.3",
+    "bootswatch": "^5.3.3",
+    "crypto-browserify": "^3.12.0",
+    "ethers": "^6.13.1",
+    "https-browserify": "^1.0.0",
+    "os-browserify": "^0.3.0",
+    "rxjs": "~7.5.7",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "tslib": "^2.3.0",
+    "url": "^0.11.3",
+    "web3": "^4.10.0",
+    "web3-eth-contract": "^4.5.0",
+    "zone.js": "~0.14.7"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^18.0.6",
+    "@angular/cli": "^18.0.6",
+    "@angular/compiler-cli": "^18.0.5",
+    "@types/jasmine": "~4.3.6",
+    "jasmine-core": "~4.5.0",
+    "karma": "~6.4.3",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage": "~2.1.0",
+    "karma-jasmine": "~4.0.0",
+    "karma-jasmine-html-reporter": "~1.7.0",
+    "typescript": "~5.4.5"
+  }
+}

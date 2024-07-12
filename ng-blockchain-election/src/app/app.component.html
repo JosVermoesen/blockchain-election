@@ -1,0 +1,90 @@
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand mr-auto" href="#">Metamask Blockchain</a>
+
+  <div>
+    @if (isChairPerson && !initialized) {
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="showFormStartElection = !showFormStartElection"
+    >
+      {{ initializeCaption }}
+    </button>
+    }
+    <a
+      href="https://cloud.google.com/application/web3/faucet/ethereum/sepolia"
+      target="_blank"
+      class="btn"
+      >Google ETH</a
+    >
+
+    <a href="https://faucets.chain.link/sepolia" target="_blank" class="btn"
+      >Chainlink ETH</a
+    >
+    <a
+      href="https://github.com/JosVermoesen/blockchain-election"
+      target="_blank"
+      class="btn"
+      >Github Source code</a
+    >
+  </div>
+</nav>
+
+<section class="bg-light text-center">
+  <h3>Election Contract (web3 v4.10.0)</h3>
+  <small>Powered By Sepolia Testnet on Angular 18</small>
+  <h5>** work in progress **</h5>
+  <div *ngIf="busyWeb3">
+    <hr />
+    <h3>One moment please...</h3>
+  </div>
+</section>
+
+<app-election-create
+  *ngIf="showFormStartElection"
+  (electionCreated)="handleElectionCreate($event)"
+></app-election-create>
+
+<section id="poll-history">
+  <div class="container">
+    <div class="row">
+      <h5>Hello, {{ myAddress }}</h5>
+      <button type="button" class="btn btn-secondary">
+        Ask permission to vote
+      </button>
+      <div class="d-flex">
+        <div class="container poll-list">
+          <div class="col-ld-5">
+            <div *ngIf="!showFormStartElection">
+              <app-election
+                *ngFor="let candidate of candidates"
+                [candidateName]="candidate.names"
+                [candidateImage]="candidate.images"
+              ></app-election>
+            </div>
+          </div>
+        </div>
+
+        <div class="container poll-split">
+          <div class="col-ld-1"></div>
+        </div>
+
+        <div class="container poll-detail">
+          <div class="col-ld-5">
+            <div *ngIf="!showFormStartElection">
+              <!-- <app-poll-vote
+                *ngIf="activePoll"
+                [id]="activePoll.id"
+                [voted]="activePoll.voted"
+                [question]="activePoll.question"
+                [options]="activePoll.options"
+                [results]="activePoll.results"
+                (pollVoted)="handlePollVote($event)"
+              ></app-poll-vote> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
