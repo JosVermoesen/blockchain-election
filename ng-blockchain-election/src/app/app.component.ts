@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { ElectionService } from './election-service/election.service';
+
 import {
   Election,
   Candidates,
   ElectionVote,
-} from './election-vote/models/types';
+} from './election/models/types';
 import { Web3Service } from './blockchain/web3.service';
+import { ElectionService } from './election/election-service/election.service';
 
 @Component({
   selector: 'app-root',

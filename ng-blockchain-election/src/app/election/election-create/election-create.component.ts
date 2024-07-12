@@ -4,8 +4,9 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { Candidates } from '../election-vote/models/types';
+
 import { ethers } from 'ethers';
+import { Candidates } from '../models/types';
 
 @Component({
   selector: 'app-election-create',

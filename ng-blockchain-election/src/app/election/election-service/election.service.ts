@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Web3Service } from '../blockchain/web3.service';
-import { Candidates } from '../election-vote/models/types';
 import { ethers } from 'ethers';
+import { Candidates } from '../models/types';
+import { Web3Service } from 'src/app/blockchain/web3.service';
 
 @Injectable({
   providedIn: 'root',
