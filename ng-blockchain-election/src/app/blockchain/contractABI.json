@@ -1,6 +1,36 @@
 [
   { "inputs": [], "stateMutability": "nonpayable", "type": "constructor" },
   {
+    "anonymous": false,
+    "inputs": [],
+    "name": "CandidateVoted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [],
+    "name": "CandidatesInitiated",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_citizen", "type": "address" }
+    ],
+    "name": "allowedToVote",
+    "outputs": [{ "internalType": "bool", "name": "canVote_", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_candidate", "type": "uint256" }
+    ],
+    "name": "candidateVotes",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "name": "candidates",
     "outputs": [

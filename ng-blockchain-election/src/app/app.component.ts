@@ -4,6 +4,7 @@ import {
   Election,
   Candidates,
   ElectionVote,
+  Candidate,
 } from './election/models/types';
 import { Web3Service } from './blockchain/web3.service';
 import { ElectionService } from './election/election-service/election.service';
@@ -24,7 +25,9 @@ export class AppComponent {
 
   initializeCaption = 'Toggle New Election';
   activeElection: Election | undefined;
-  candidates: any = [];
+
+  candidatesToInit: any = [];
+  candidatesList: Candidate[] = [];
 
   constructor(private es: ElectionService, private ws: Web3Service) {
     this.ws.isBusy$.subscribe((isBusy) => {
@@ -37,15 +40,18 @@ export class AppComponent {
       this.isChairPerson = result;
     });
     this.chairPersonAddress = await this.ws.call('chairperson');
-    // console.log('chairperson', this.chairPersonAddress);
     this.myAddress = await this.ws.getAccount();
-    // console.log('myAddress', this.myAddress);
     this.initialized = await this.ws.call('initialized');
-    // console.log('initialized', this.initialized);
 
     if (this.initialized) {
-      this.candidates = await this.es.getCandidates();
-      console.log('candidates', this.candidates);
+      this.candidatesList = await this.es.getCandidates();
+      console.log('candidates', this.candidatesList);
+    } else {
+      this.es.onEvent('CandidatesInitiated').subscribe(() => {
+        console.log('CandidatesInitiated');
+        this.ws.setBusy(false);
+        this.candidatesToInit = this.es.getCandidates();
+      });
     }
 
     /* this.es.onEvent('ElectionCreated').subscribe(() => {
@@ -70,13 +76,13 @@ export class AppComponent {
 
   handleElectionCreate(election: Candidates) {
     // console.log('election', election);
-
+    this.ws.setBusy(true);
     this.es.createElection(election);
   }
 
   askPermissionToVote() {
     alert('Soon available!');
-  } 
+  }
 
   /* handlePollVote(pollVoted: PollVote) {
     this.ps.vote(pollVoted.id, pollVoted.vote);

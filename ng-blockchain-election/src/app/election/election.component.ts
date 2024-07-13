@@ -7,9 +7,13 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ElectionComponent implements OnInit {
   @Input()
+  candidateId?: number;
+  @Input()
   candidateName?: string;
   @Input()
   candidateImage?: string;
+  @Input()
+  candidateVotes?: number;
 
   /* @Input()
   votes: number[] = []; // [0, 1, 5, 7]

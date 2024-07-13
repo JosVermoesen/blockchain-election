@@ -9,6 +9,13 @@ export interface Candidates {
   images: string[]; // ["https://image.png", "https://image.png"]
 }
 
+export interface Candidate {
+  id: number; // 0
+  name: string; // ["Joe Biden", "Donald Trump"]
+  imageUrl: string; // ["https://image.png", "https://image.png"]
+  voteCount: number; // [12]
+}
+
 export interface ElectionVote {
   id: number;
   vote: number;

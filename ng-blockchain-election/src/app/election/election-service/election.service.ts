@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ethers } from 'ethers';
-import { Candidates } from '../models/types';
+import { Candidate, Candidates } from '../models/types';
 import { Web3Service } from 'src/app/blockchain/web3.service';
 
 @Injectable({
@@ -8,6 +8,7 @@ import { Web3Service } from 'src/app/blockchain/web3.service';
 })
 export class ElectionService {
   candidatesToReturn: Candidates[] = [];
+  candidates: Candidate[] = [];
 
   constructor(private web3: Web3Service) {}
 
@@ -24,7 +25,28 @@ export class ElectionService {
     console.log(result);
   }
 
-  async getCandidates(): Promise<Candidates[]> {
+  async getCandidates(): Promise<Candidate[]> {
+    const candidatesCount: number = await this.web3.call('candidatesCount');
+    console.log('candidatesCount', candidatesCount);
+    
+    for (let c = 0; c < candidatesCount; c++) {
+      const candidate: any = await this.web3.call('getCandidate', c);
+
+      const candidateName = ethers.decodeBytes32String(candidate[1]);
+      const candidateImage = ethers.decodeBytes32String(candidate[2]);
+      this.candidates.push({
+        id: candidate[0],
+        name: candidateName,
+        imageUrl: candidateImage,
+        voteCount: candidate[3]
+      });
+    }
+    return this.candidates;
+  }
+
+
+
+  /* async getCandidates(): Promise<Candidates[]> {
     const candidatesCount: number = await this.web3.call('candidatesCount');
     console.log('candidatesCount', candidatesCount);
     for (let c = 0; c < candidatesCount; c++) {
@@ -38,7 +60,7 @@ export class ElectionService {
       });
     }
     return this.candidatesToReturn;
-  }
+  } */
 
   /* vote(pollId: number, voteNumber: number) {
     console.log(pollId, voteNumber);

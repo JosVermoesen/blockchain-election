@@ -1,9 +1,8 @@
 import { Injectable, NgZone } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Web3 } from 'web3';
-import { Contract } from 'web3-eth-contract';
 
-const contractAbi = require('./contractABI.json');
+import contractAbi from './contractABI.json';
 
 declare var window: any;
 
@@ -16,9 +15,9 @@ export class Web3Service {
 
   private web3 = new Web3(window.ethereum);
   private contract!: any;
-
+  private contractAddress = '0xad6C120F1aFe8Ffda1f1F7B033C67A80947ffFD4';
+  // 0xad6C120F1aFe8Ffda1f1F7B033C67A80947ffFD4 - contract address 2024-07-13
   // 0x80639F8EA1e0A6da4E2Edc53473089DB98978b60 - contract address 2024-07-08
-  private contractAddress = '0x80639F8EA1e0A6da4E2Edc53473089DB98978b60';
 
   constructor(private zone: NgZone) {
     if (window.web3) {
@@ -48,11 +47,9 @@ export class Web3Service {
     return this.isBusySource.value;
   }
 
-  /* async getOwner(): Promise<any> {
-    const owner = await this.call('chairperson');
-
-    return owner;
-  } */
+  onEvent(name: string) {
+    return this.onEvents(name);
+  }
 
   getAccount(): Promise<string> {
     return this.web3.eth.getAccounts().then((accounts) => accounts[0] || '');

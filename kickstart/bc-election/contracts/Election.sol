@@ -31,6 +31,9 @@ contract Election {
     mapping(address => Voter) public voters;
     Candidate[] public candidates;
 
+    event CandidatesInitiated();
+    event CandidateVoted();
+
     constructor() {
         chairperson = msg.sender;
         voters[chairperson].weight = 1;
@@ -53,6 +56,7 @@ contract Election {
                 })
             );
         }
+        emit CandidatesInitiated();
     }
 
     /**
@@ -127,6 +131,7 @@ contract Election {
         // this will throw automatically and revert all
         // changes.
         candidates[_candidate].voteCount += sender.weight;
+        emit CandidateVoted();
     }
 
     /**
