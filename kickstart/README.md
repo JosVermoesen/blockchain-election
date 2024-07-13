@@ -44,7 +44,7 @@ IMPORTANT: Before testing you should precompile bc-election
 ## Compiling 2
 
 - Move into directory
-- `node compile4JSON.js`
+- `node compile4ABI.js`
 
 ## Testing
 
