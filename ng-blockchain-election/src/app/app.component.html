@@ -40,18 +40,34 @@
   </div>
 </section>
 
+@if (showFormStartElection) {
 <app-election-create
-  *ngIf="showFormStartElection"
   (electionCreated)="handleElectionCreate($event)"
 ></app-election-create>
+}
 
 <section id="poll-history">
   <div class="container">
     <div class="row">
+      @if (isChairPerson && !initialized) {
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="showFormStartElection = !showFormStartElection"
+      >
+        {{ initializeCaption }}
+      </button>
+      } @if (isChairPerson) {
       <h5>Hello, {{ myAddress }}</h5>
-      <button (click)="askPermissionToVote()" type="button" class="btn btn-secondary">
+      <button
+        (click)="askPermissionToVote()"
+        type="button"
+        class="btn btn-secondary"
+      >
         Ask permission to vote
       </button>
+      }
+
       <div class="d-flex">
         <div class="container poll-list">
           <div class="col-ld-5">

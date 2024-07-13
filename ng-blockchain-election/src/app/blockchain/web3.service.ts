@@ -3,10 +3,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Web3 } from 'web3';
 import { Contract } from 'web3-eth-contract';
 
-// Localhost Ganache UI
-// const contractAbi = require('./contractABI.json');
-
-// Rinkeby
 const contractAbi = require('./contractABI.json');
 
 declare var window: any;
@@ -20,6 +16,8 @@ export class Web3Service {
 
   private web3 = new Web3(window.ethereum);
   private contract!: any;
+
+  // 0x80639F8EA1e0A6da4E2Edc53473089DB98978b60 - contract address 2024-07-08
   private contractAddress = '0x80639F8EA1e0A6da4E2Edc53473089DB98978b60';
 
   constructor(private zone: NgZone) {

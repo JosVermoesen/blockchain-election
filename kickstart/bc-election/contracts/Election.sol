@@ -73,7 +73,9 @@ contract Election {
      * @dev Calls allowedToVote() function to check if ready to citizen allowed to vote
      * @return canVote_ true or error
      */
-    function allowedToVote(address _citizen) public view returns (bool canVote_) {
+    function allowedToVote(
+        address _citizen
+    ) public view returns (bool canVote_) {
         canVote_ = false;
         if (voters[_citizen].weight != 0) {
             canVote_ = true;
@@ -125,6 +127,17 @@ contract Election {
         // this will throw automatically and revert all
         // changes.
         candidates[_candidate].voteCount += sender.weight;
+    }
+
+    /**
+     * @dev Give your number of vote to Candidate
+     * @param _candidate index of Candidate in the candidates array
+     */
+    function candidateVotes(uint _candidate) public view returns (uint) {
+        if (_candidate >= candidates.length) {
+            revert("Candidate index out of bounds");
+        }
+        return candidates[_candidate].voteCount;
     }
 
     /**

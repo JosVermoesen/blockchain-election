@@ -148,6 +148,16 @@ describe("Election Contract", () => {
     }
 
     try {
+      const count = await election.methods.candidateVotes(0).call();
+      assert.equal(1, count);
+
+      const count2 = await election.methods.candidateVotes(1).call();
+      assert.equal(3, count2);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+
+    try {
       const winner = await election.methods.winningCandidate().send({
         from: accounts[0],
         gas: "1000000",

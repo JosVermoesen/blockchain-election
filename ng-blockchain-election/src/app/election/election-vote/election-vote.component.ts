@@ -14,8 +14,6 @@ import {
 import ApexCharts from 'apexcharts';
 import { ElectionVote } from '../models/types';
 
-
-
 @Component({
   selector: 'app-election-vote',
   templateUrl: './election-vote.component.html',
