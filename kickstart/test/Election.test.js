@@ -33,7 +33,7 @@ beforeEach(async () => {
       })
       .send({
         from: accounts[0],
-        gas: "1300000",
+        gas: "1400000",
       });
   } catch (error) {
     console.log("error: ", error);
@@ -197,6 +197,15 @@ describe("Election Contract", () => {
       } catch (error) {
         console.log("error: ", error);
       }
+    }
+
+    try {
+      const allowed = await election.methods.allowedToVote(accounts[5]).call();
+      assert.equal(false, allowed);
+      const allowed2 = await election.methods.allowedToVote(accounts[4]).call();
+      assert.equal(true, allowed2);
+    } catch (error) {
+      console.log("error: ", error.message);
     }
   });
 });

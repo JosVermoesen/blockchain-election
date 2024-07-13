@@ -74,6 +74,10 @@ export class AppComponent {
     this.es.createElection(election);
   }
 
+  askPermissionToVote() {
+    alert('Soon available!');
+  } 
+
   /* handlePollVote(pollVoted: PollVote) {
     this.ps.vote(pollVoted.id, pollVoted.vote);
   } */

@@ -70,6 +70,18 @@ contract Election {
     }
 
     /**
+     * @dev Calls allowedToVote() function to check if ready to citizen allowed to vote
+     * @return canVote_ true or error
+     */
+    function allowedToVote(address _citizen) public view returns (bool canVote_) {
+        canVote_ = false;
+        if (voters[_citizen].weight != 0) {
+            canVote_ = true;
+        }
+        return canVote_;
+    }
+
+    /**
      * @dev Delegate your vote to the voter 'to'.
      * @param to address to which vote is delegated
      */
