@@ -39,7 +39,7 @@ All in one command:
 - Move into directory
 - `node compile.js`
 
-IMPORTANT: Before testing you should precompile bc-campaign
+IMPORTANT: Before testing you should precompile bc-election
 
 ## Compiling 2
 
