@@ -66,7 +66,7 @@ export class Web3Service {
     }
   }
 
-  async executeTransaction(fnName: string, ...args: any[]): Promise<void> {
+  async executeTransaction(fnName: string, ...args: any[]): Promise<void> {    
     this.setBusy(true);
     const acc = await this.getAccount();
     this.contract.methods[fnName](...args)

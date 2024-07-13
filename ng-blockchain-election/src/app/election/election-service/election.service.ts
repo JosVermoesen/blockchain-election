@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { ethers } from 'ethers';
-import { Candidate, Candidates } from '../models/types';
 import { Web3Service } from 'src/app/blockchain/web3.service';
+import { ICandidateStruct } from '../models/ICandidateStruct';
+import { ICandidatesInitial } from '../models/ICandidatesInitial';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ElectionService {
-  candidatesToReturn: Candidates[] = [];
-  candidates: Candidate[] = [];
+  candidatesToReturn: ICandidatesInitial[] = [];
+  candidates: ICandidateStruct[] = [];
 
   constructor(private web3: Web3Service) {}
 
@@ -16,7 +17,7 @@ export class ElectionService {
     return this.web3.onEvents(name);
   }
 
-  createElection(election: Candidates) {
+  createElection(election: ICandidatesInitial) {
     const result = this.web3.executeTransaction(
       'initCandidates',
       election.names,
@@ -25,7 +26,7 @@ export class ElectionService {
     console.log(result);
   }
 
-  async getCandidates(): Promise<Candidate[]> {
+  async getCandidates(): Promise<ICandidateStruct[]> {
     const candidatesCount: number = await this.web3.call('candidatesCount');
     console.log('candidatesCount', candidatesCount);
     

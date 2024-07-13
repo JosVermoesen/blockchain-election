@@ -31,8 +31,8 @@
 </nav>
 
 <section class="bg-light text-center">
-  <h3>Election Contract (web3 v4.10.0)</h3>
-  <small>Powered By Sepolia Testnet on Angular 18</small>
+  <h3>Election Contract (web3 v4.11.0)</h3>
+  <small>Powered By Sepolia Testnet on Angular 18.1</small>
   <h5>** work in progress **</h5>
 </section>
 
@@ -74,12 +74,11 @@
           <div class="col-ld-5">
             <div *ngIf="!showFormStartElection">
               <app-election
-                *ngFor="let candidate of candidatesList" 
-                [candidateId]="candidate.id"               
+                *ngFor="let candidate of candidatesArray"
+                [candidateId]="candidate.id"
                 [candidateName]="candidate.name"
                 [candidateImage]="candidate.imageUrl"
                 [candidateVotes]="candidate.voteCount"
-                
               ></app-election>
             </div>
           </div>

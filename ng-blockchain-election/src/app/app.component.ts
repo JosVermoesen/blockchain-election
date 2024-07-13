@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
 
-import {
-  Election,
-  Candidates,
-  ElectionVote,
-  Candidate,
-} from './election/models/types';
+import { Election, ElectionVote } from './election/models/types';
 import { Web3Service } from './blockchain/web3.service';
 import { ElectionService } from './election/election-service/election.service';
+import { ICandidateStruct } from './election/models/ICandidateStruct';
+import { ICandidatesInitial } from './election/models/ICandidatesInitial';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +24,7 @@ export class AppComponent {
   activeElection: Election | undefined;
 
   candidatesToInit: any = [];
-  candidatesList: Candidate[] = [];
+  candidatesArray: ICandidateStruct[] = [];
 
   constructor(private es: ElectionService, private ws: Web3Service) {
     this.ws.isBusy$.subscribe((isBusy) => {
@@ -44,8 +41,8 @@ export class AppComponent {
     this.initialized = await this.ws.call('initialized');
 
     if (this.initialized) {
-      this.candidatesList = await this.es.getCandidates();
-      console.log('candidates', this.candidatesList);
+      this.candidatesArray = await this.es.getCandidates();
+      console.log('candidates', this.candidatesArray);
     } else {
       this.es.onEvent('CandidatesInitiated').subscribe(() => {
         console.log('CandidatesInitiated');
@@ -74,10 +71,11 @@ export class AppComponent {
     }, 100);
   } */
 
-  handleElectionCreate(election: Candidates) {
+  handleElectionCreate(candidatesInitial: ICandidatesInitial) {
     // console.log('election', election);
-    this.ws.setBusy(true);
-    this.es.createElection(election);
+    this.busyWeb3 = true;
+    this.ws.setBusy(this.busyWeb3);
+    this.es.createElection(candidatesInitial);
   }
 
   askPermissionToVote() {

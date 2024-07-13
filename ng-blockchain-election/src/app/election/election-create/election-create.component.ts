@@ -6,7 +6,8 @@ import {
 } from '@angular/forms';
 
 import { ethers } from 'ethers';
-import { Candidates } from '../models/types';
+import { ICandidatesInitial } from '../models/ICandidatesInitial';
+import { Web3Service } from 'src/app/blockchain/web3.service';
 
 @Component({
   selector: 'app-election-create',
@@ -15,10 +16,16 @@ import { Candidates } from '../models/types';
 })
 export class ElectionCreateComponent {
   Candidates: UntypedFormGroup;
+  busyWeb3 = false;
 
-  @Output() electionCreated: EventEmitter<Candidates> = new EventEmitter();
+  @Output() electionCreated: EventEmitter<ICandidatesInitial> =
+    new EventEmitter();
 
-  constructor(private fb: UntypedFormBuilder) {
+  constructor(private fb: UntypedFormBuilder, private ws: Web3Service) {
+    this.ws.isBusy$.subscribe((isBusy) => {
+      this.busyWeb3 = isBusy || false;
+    });
+
     this.Candidates = this.fb.group({
       nameCandidate1: this.fb.control('', [
         Validators.required,
@@ -54,29 +61,21 @@ export class ElectionCreateComponent {
 
   submitForm() {
     const candidateNames = [
-      ethers.encodeBytes32String(
-        this.Candidates.get('nameCandidate1')?.value
-      ),
-      ethers.encodeBytes32String(
-        this.Candidates.get('nameCandidate2')?.value
-      ),
+      ethers.encodeBytes32String(this.Candidates.get('nameCandidate1')?.value),
+      ethers.encodeBytes32String(this.Candidates.get('nameCandidate2')?.value),
     ];
 
     const candidateImages = [
-      ethers.encodeBytes32String(
-        this.Candidates.get('imageCandidate1')?.value
-      ),
-      ethers.encodeBytes32String(
-        this.Candidates.get('imageCandidate2')?.value
-      ),
+      ethers.encodeBytes32String(this.Candidates.get('imageCandidate1')?.value),
+      ethers.encodeBytes32String(this.Candidates.get('imageCandidate2')?.value),
     ];
 
-    const formData: Candidates = {
+    const formData: ICandidatesInitial = {
       names: candidateNames,
       images: candidateImages,
     };
-    //console.log('formData', formData);
 
+    this.ws.setBusy(true);
     this.electionCreated.emit(formData);
   }
 }
