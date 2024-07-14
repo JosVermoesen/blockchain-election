@@ -10,6 +10,6 @@ fs.ensureDirSync(buildPath);
 
 console.log(abi);
 fs.outputFileSync(
-  path.resolve(buildPath, "lotteryABI.json"),
+  path.resolve(buildPath, "electionABI.json"),
   JSON.stringify(abi)
 );

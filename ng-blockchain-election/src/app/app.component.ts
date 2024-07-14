@@ -20,7 +20,7 @@ export class AppComponent {
   isChairPerson = false;
   initialized = false;
 
-  initializeCaption = 'Toggle New Election';
+  initializeCaption = 'New Election';
   activeElection: Election | undefined;
 
   candidatesToInit: any = [];
