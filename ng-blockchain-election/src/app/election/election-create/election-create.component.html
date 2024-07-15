@@ -1,171 +1,80 @@
-<section id="contact" class="py-2">
+<section id="election-create">
   <div class="container">
-    <div class="row">
-      <div class="col-md-3"></div>
+    <div class="card-body">
+      <button (click)="example()" class="btn btn-sm btn-success mt-3">
+        Example Fill-In
+      </button>
+    </div>
+    <br />
 
-      <div class="col-md-6">
-        <div class="card p-6">
-          <div class="card-body">
-            <div class="d-flex justify-content-center">
-              <button (click)="example()" class="btn btn-sm btn-success mt-3">
-                Example Fill-In
-              </button>
-            </div>
-            <br />
-
-            <form [formGroup]="Candidates" (ngSubmit)="submitForm()">
-              <div>
-                <label>First Candidate: </label>
-                <div>
-                  <input
-                    formControlName="nameCandidate1"
-                    type="text"
-                    class="form-control form-control-sm"
-                    placeholder="Name"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label>Image First Candidate: </label>
-                <div>
-                  <input
-                    formControlName="imageCandidate1"
-                    type="text"
-                    class="form-control form-control-sm"
-                    placeholder="Url to image"
-                  />
-                </div>
-                <a
-                  href="{{ Candidates.value.imageCandidate1 }}"
-                  target="_blank"
-                  class="btn btn-sm btn-warning mt-3"
-                  >Check image 1</a
-                >
-              </div>
-              <br />
-              <div>
-                <label>Second Candidate: </label>
-                <div>
-                  <input
-                    formControlName="nameCandidate2"
-                    type="text"
-                    class="form-control form-control-sm"
-                    placeholder="Name"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label>Image Second Candidate: </label>
-                <div>
-                  <input
-                    formControlName="imageCandidate2"
-                    type="text"
-                    class="form-control form-control-sm"
-                    placeholder="Url to image"
-                  />
-                </div>
-                <a
-                  href="{{ Candidates.value.imageCandidate2 }}"
-                  target="_blank"
-                  class="btn btn-sm btn-warning mt-3"
-                  >Check image 2</a
-                >
-              </div>
-              <br />
-
-              <div class="d-flex justify-content-center">
-                <button
-                  [disabled]="!Candidates.valid"
-                  type="submit"
-                  class="btn btn-sm btn-secondary mt-3"
-                >
-                  Submit candidates
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+    <form [formGroup]="Candidates" (ngSubmit)="submitForm()">
+      <div class="mb-3">
+        <select class="form-select">
+          <option>Fill in or select a demo election</option>
+          <option value="usaPresident">USA President election</option>
+          <!-- <option value="anotherDemo1">todo: another</option>
+          <option value="anotherDemo2">todo: another</option> -->
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">First Candidate</label>
+        <input
+          formControlName="nameCandidate1"
+          type="text"
+          placeholder="name Candidate 1"
+          class="form-control"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Image First Candidate</label>
+        <input
+          formControlName="imageCandidate1"
+          type="text"
+          placeholder="imageUrl Candidate 1"
+          class="form-control"
+        />
+        <a
+          href="{{ Candidates.value.imageCandidate1 }}"
+          target="_blank"
+          class="btn btn-sm btn-warning mt-3"
+          >Check image 1</a
+        >
       </div>
 
-      <div class="col-md-3"></div>
-    </div>
+      <div class="mb-3">
+        <label class="form-label">Second Candidate</label>
+        <input
+          formControlName="nameCandidate2"
+          type="text"
+          placeholder="name Candidate 2"
+          class="form-control"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="imageUrl2" class="form-label">Image Second Candidate</label>
+        <input
+          formControlName="imageCandidate2"
+          type="text"
+          placeholder="imageUrl Candidate 2"
+          class="form-control"
+        />
+        <a
+          href="{{ Candidates.value.imageCandidate2 }}"
+          target="_blank"
+          class="btn btn-sm btn-warning mt-3"
+          >Check image 2</a
+        >
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <button
+          [disabled]="!Candidates.valid"
+          type="submit"
+          class="btn btn-sm btn-secondary mt-3"
+        >
+          Submit candidates
+        </button>
+      </div>
+    </form>
   </div>
 </section>
-
-<!-- <form
-  [formGroup]="pollForm"
-  (ngSubmit)="submitForm()"
-  class="container col-sm-4"
->
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label col-form-label-sm">
-      Question:
-    </label>
-    <div class="col-sm-8">
-      <input
-        formControlName="question"
-        type="text"
-        class="form-control form-control-sm"
-        placeholder="Poll question"
-      />
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label col-form-label-sm">
-      Image:
-    </label>
-    <div class="col-sm-8">
-      <input
-        formControlName="image"
-        type="text"
-        class="form-control form-control-sm"
-        placeholder="Url to image"
-      />
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label col-form-label-sm">
-      Options:
-    </label>
-    <div class="col-sm-8">
-      <input
-        formControlName="op1"
-        type="text"
-        class="form-control form-control-sm"
-        placeholder="Option 1"
-      />
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label col-form-label-sm"> </label>
-    <div class="col-sm-8">
-      <input
-        formControlName="op2"
-        type="text"
-        class="form-control form-control-sm"
-        placeholder="Option 2"
-      />
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label col-form-label-sm"> </label>
-    <div class="col-sm-8">
-      <input
-        formControlName="op3"
-        type="text"
-        class="form-control form-control-sm"
-        placeholder="Option 3"
-      />
-    </div>
-  </div>
-
-  <div class="d-flex justify-content-center">
-    <button type="submit" class="btn btn-sm btn-secondary">Submit poll</button>
-  </div>
-</form> -->

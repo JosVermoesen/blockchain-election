@@ -3,7 +3,6 @@ import { Component, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'app-election',
   templateUrl: './election.component.html',
-  styleUrls: ['./election.component.scss'],
 })
 export class ElectionComponent implements OnInit {
   @Input()
@@ -19,7 +18,7 @@ export class ElectionComponent implements OnInit {
   votes: number[] = []; // [0, 1, 5, 7]
   @Input()
   voted!: boolean; */
-  
+
   numberOfVotes!: number;
 
   constructor() {}

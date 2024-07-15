@@ -12,7 +12,6 @@ import { Web3Service } from 'src/app/blockchain/web3.service';
 @Component({
   selector: 'app-election-create',
   templateUrl: './election-create.component.html',
-  styleUrls: ['./election-create.component.scss'],
 })
 export class ElectionCreateComponent {
   Candidates: UntypedFormGroup;
@@ -27,22 +26,22 @@ export class ElectionCreateComponent {
     });
 
     this.Candidates = this.fb.group({
-      nameCandidate1: this.fb.control('', [
+      nameCandidate1: this.fb.control(null, [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(32),
       ]),
-      imageCandidate1: this.fb.control('', [
+      imageCandidate1: this.fb.control(null, [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(32),
       ]),
-      nameCandidate2: this.fb.control('', [
+      nameCandidate2: this.fb.control(null, [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(32),
       ]),
-      imageCandidate2: this.fb.control('', [
+      imageCandidate2: this.fb.control(null, [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(32),
