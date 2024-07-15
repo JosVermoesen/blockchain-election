@@ -85,19 +85,17 @@
   }
 </section>
 
-<section id="candidates" class="mb-8">
+<section id="candidates">
   @if (!showFormStartElection) {
   <div class="container">
-    <div class="row">
-      <div *ngIf="!showFormStartElection">
-        <app-election
-          *ngFor="let candidate of candidatesArray"
-          [candidateId]="candidate.id"
-          [candidateName]="candidate.name"
-          [candidateImage]="candidate.imageUrl"
-          [candidateVotes]="candidate.voteCount"
-        ></app-election>
-      </div>
+    <div class="card-group">
+      <app-election
+        *ngFor="let candidate of candidatesArray"
+        [candidateId]="candidate.id"
+        [candidateName]="candidate.name"
+        [candidateImage]="candidate.imageUrl"
+        [candidateVotes]="candidate.voteCount"
+      ></app-election>
     </div>
   </div>
   }
