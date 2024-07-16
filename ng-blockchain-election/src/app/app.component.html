@@ -63,10 +63,13 @@
   <div class="container">
     <div>
       Hello, {{ myAddress }}
+      <!-- Modal Button -->
       <button
-        (click)="askPermissionToVote()"
         type="button"
         class="btn btn-secondary"
+        data-bs-toggle="modal"
+        data-bs-target="#myPermissionModal"
+        (click)="GetPermission.controls['voterAddress'].setValue(myAddress)"
       >
         Ask permission to vote
       </button>
@@ -132,3 +135,51 @@
     </div>
   </div>
 </section>
+
+<!-- PermissionModal -->
+<div class="modal fade" id="myPermissionModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="myModalLabel">
+          Give me permission to vote please
+        </h1>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="GetPermission" (ngSubmit)="sendEmail()">
+          <div class="mb-3">
+            <label class="form-label">My Address</label>
+            <input
+              formControlName="voterAddress"
+              type="text"
+              readonly
+              class="form-control"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">My Email</label>
+            <input
+              formControlName="voterEmail"
+              type="email"
+              placeholder="valid email address"
+              class="form-control"
+            />
+          </div>
+
+          <div class="modal-footer">
+            <button
+              [disabled]="!GetPermission.valid"
+              type="submit"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"              
+            >
+              {{ sendEmailCaption }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

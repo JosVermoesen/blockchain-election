@@ -1,19 +1,21 @@
 import { Component } from '@angular/core';
 
-import { Election, ElectionVote } from './election/models/types';
+import { Election } from './election/models/types';
 import { Web3Service } from './blockchain/web3.service';
 import { ElectionService } from './election/election-service/election.service';
 import { ICandidateStruct } from './election/models/ICandidateStruct';
 import { ICandidatesInitial } from './election/models/ICandidatesInitial';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   showFormStartElection = false;
+  GetPermission!: FormGroup;
   busyWeb3 = false;
+  sendEmailCaption = 'Send';
 
   chairPersonAddress = '';
   myAddress = '';
@@ -26,9 +28,22 @@ export class AppComponent {
   candidatesToInit: any = [];
   candidatesArray: ICandidateStruct[] = [];
 
-  constructor(private es: ElectionService, private ws: Web3Service) {
+  constructor(
+    private fb: FormBuilder,
+    private es: ElectionService,
+    private ws: Web3Service
+  ) {
     this.ws.isBusy$.subscribe((isBusy) => {
       this.busyWeb3 = isBusy || false;
+    });
+
+    this.GetPermission = this.fb.group({
+      voterAddress: this.fb.control(this.myAddress, [Validators.required]),
+
+      voterEmail: this.fb.control(null, [
+        Validators.required,
+        Validators.email,
+      ]),
     });
   }
 
@@ -63,6 +78,12 @@ export class AppComponent {
     }); */
   }
 
+  sendEmail() {
+    this.ws.setBusy(true);
+    alert('Soon available!');
+    this.ws.setBusy(false);
+  }
+
   /* setActivePoll(poll: Poll | undefined) {
     this.activePoll = undefined;
 
@@ -72,14 +93,9 @@ export class AppComponent {
   } */
 
   handleElectionCreate(candidatesInitial: ICandidatesInitial) {
-    // console.log('election', election);
     this.busyWeb3 = true;
     this.ws.setBusy(this.busyWeb3);
     this.es.createElection(candidatesInitial);
-  }
-
-  askPermissionToVote() {
-    alert('Soon available!');
   }
 
   /* handlePollVote(pollVoted: PollVote) {
