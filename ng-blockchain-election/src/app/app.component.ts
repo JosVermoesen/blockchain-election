@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Election } from './models/types';
 import { ICandidateStruct } from './models/ICandidateStruct';
@@ -9,18 +9,22 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { IContactmail } from './models/contactmail';
 import { MailService } from './services/mail.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
+  private toastr = inject(ToastrService);
+
   showFormStartElection = false;
 
   permissionForm!: FormGroup;
   form!: FormGroup;
 
   busyWeb3 = false;
+  busyMail = false;
   sendEmailCaption = 'Send';
 
   chairPersonAddress = '';
@@ -141,10 +145,7 @@ export class AppComponent implements OnInit {
   }
 
   sendEmail() {
-    this.ws.setBusy(true);
-    alert('Soon available!');
-    this.ws.setBusy(false);
-
+    this.toastr.info('Mail Sending...');
     this.http
       .get('assets/templates/mail/' + this.templateName, {
         responseType: 'text',
@@ -161,26 +162,17 @@ export class AppComponent implements OnInit {
     this.refreshTemplateBody();
     // console.log(this.form.value);
     this.contactMail = Object.assign({}, this.form.value);
-    this.ws.setBusy(true);
+    this.busyMail = true;
     this.ms.sendMail(this.contactMail).subscribe({
-      next: () => {
-        /* this.ts.get('CONTACT.SendSuccess').subscribe((res: string) => {
-          this.toastr.info(res);
-        }); */
-        console.log('next');
-      },
+      next: () => {},
       error: () => {
-        /* this.ts.get('CONTACT.SendFailed').subscribe((res: string) => {
-          this.toastr.error(res);
-          
-        }); */
-        console.log('error');
-        this.ws.setBusy(false);
+        this.toastr.error('Mail not sent!');
+        this.busyMail = false;
       },
       complete: () => {
-        this.ws.setBusy(false);
+        this.busyMail = false;
         this.permissionForm.reset();
-        console.log('complete');
+        this.toastr.success('Done!');
       },
     });
   }

@@ -11,6 +11,7 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
+import { provideToastr } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,19 @@ import {
     ElectionVoteComponent,
   ],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule],
-  providers: [Web3Service, provideHttpClient(withInterceptorsFromDi())],
+  providers: [
+    Web3Service,
+    provideHttpClient(withInterceptorsFromDi()),
+
+    provideToastr({
+      positionClass: 'toast-bottom-right',
+    }),
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+function provideAnimations():
+  | import('@angular/core').Provider
+  | import('@angular/core').EnvironmentProviders {
+  throw new Error('Function not implemented.');
+}

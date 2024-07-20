@@ -54,7 +54,7 @@
   <h3>Election Contract (web3 v4.11.0)</h3>
   <small>Powered By Sepolia Testnet on Angular 18.1</small>
   <h5>** work in progress **</h5>
-  @if (busyWeb3) {
+  @if (busyWeb3 || busyMail) {
   <div>
     <hr />
     <h3>One moment please...</h3>
@@ -173,7 +173,7 @@
               [disabled]="!permissionForm.valid"
               type="submit"
               class="btn btn-primary"
-              data-bs-dismiss="modal"              
+              data-bs-dismiss="modal"
             >
               {{ sendEmailCaption }}
             </button>
