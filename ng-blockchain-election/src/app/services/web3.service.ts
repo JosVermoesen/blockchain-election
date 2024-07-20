@@ -2,7 +2,7 @@ import { Injectable, NgZone } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Web3 } from 'web3';
 
-import contractAbi from './contractABI.json';
+import contractAbi from '../blockchain/contractABI.json';
 
 declare var window: any;
 

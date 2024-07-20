@@ -12,7 +12,8 @@ import {
   Validators,
 } from '@angular/forms';
 import ApexCharts from 'apexcharts';
-import { ElectionVote } from '../models/types';
+import { ElectionVote } from 'src/app/models/types';
+
 
 @Component({
   selector: 'app-election-vote',

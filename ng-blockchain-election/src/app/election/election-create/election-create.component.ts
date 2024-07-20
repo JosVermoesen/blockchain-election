@@ -6,8 +6,10 @@ import {
 } from '@angular/forms';
 
 import { ethers } from 'ethers';
-import { ICandidatesInitial } from '../models/ICandidatesInitial';
-import { Web3Service } from 'src/app/blockchain/web3.service';
+import { ICandidatesInitial } from 'src/app/models/candidatesInitial';
+
+import { Web3Service } from 'src/app/services/web3.service';
+
 
 @Component({
   selector: 'app-election-create',
