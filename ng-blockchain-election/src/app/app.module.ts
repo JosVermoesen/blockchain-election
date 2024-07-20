@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ElectionComponent } from './election/election.component';
 import { ElectionCreateComponent } from './election/election-create/election-create.component';
 import { ElectionVoteComponent } from './election/election-vote/election-vote.component';
@@ -20,7 +20,12 @@ import { provideToastr } from 'ngx-toastr';
     ElectionComponent,
     ElectionVoteComponent,
   ],
-  imports: [BrowserModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [
     Web3Service,
     provideHttpClient(withInterceptorsFromDi()),
