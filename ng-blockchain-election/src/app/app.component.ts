@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
     private http: HttpClient,
     private ms: MailService
   ) {
-    this.ws.isBusy$.subscribe((isBusy) => {
+    this.ws.isWeb3Busy$.subscribe((isBusy) => {
       this.busyWeb3 = isBusy || false;
     });
   }
@@ -77,7 +77,7 @@ export class AppComponent implements OnInit {
     } else {
       this.es.onEvent('CandidatesInitiated').subscribe(() => {
         console.log('CandidatesInitiated');
-        this.ws.setBusy(false);
+        this.ws.setWeb3Busy(false);
         this.candidatesToInit = this.es.getCandidates();
       });
     }
@@ -187,7 +187,7 @@ export class AppComponent implements OnInit {
 
   handleElectionCreate(candidatesInitial: ICandidatesInitial) {
     this.busyWeb3 = true;
-    this.ws.setBusy(this.busyWeb3);
+    this.ws.setWeb3Busy(this.busyWeb3);
     this.es.createElection(candidatesInitial);
   }
 

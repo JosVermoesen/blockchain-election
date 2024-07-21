@@ -23,7 +23,7 @@ export class ElectionCreateComponent {
     new EventEmitter();
 
   constructor(private fb: UntypedFormBuilder, private ws: Web3Service) {
-    this.ws.isBusy$.subscribe((isBusy) => {
+    this.ws.isWeb3Busy$.subscribe((isBusy) => {
       this.busyWeb3 = isBusy || false;
     });
 
@@ -76,7 +76,7 @@ export class ElectionCreateComponent {
       images: candidateImages,
     };
 
-    this.ws.setBusy(true);
+    this.ws.setWeb3Busy(true);
     this.electionCreated.emit(formData);
   }
 }
