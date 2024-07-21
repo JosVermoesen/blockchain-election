@@ -22,10 +22,12 @@ export class AppComponent implements OnInit {
 
   permissionForm!: FormGroup;
   form!: FormGroup;
+  givePermissionForm!: FormGroup;
 
   busyWeb3 = false;
   busyMail = false;
   sendEmailCaption = 'Send';
+  givePermissionCaption = 'Give Permission';
 
   chairPersonAddress = '';
   myAddress = '';
@@ -64,6 +66,17 @@ export class AppComponent implements OnInit {
       ]),
     });
 
+    this.givePermissionForm = this.fb.group({
+      voterAddress: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(42),
+          Validators.maxLength(42),
+        ],
+      ],
+    });
+
     this.ws.chairPersonIsUser().then((result) => {
       this.isChairPerson = result;
     });
@@ -73,7 +86,7 @@ export class AppComponent implements OnInit {
 
     if (this.initialized) {
       this.candidatesArray = await this.es.getCandidates();
-      console.log('candidates', this.candidatesArray);
+      // console.log('candidates', this.candidatesArray);
     } else {
       this.es.onEvent('CandidatesInitiated').subscribe(() => {
         console.log('CandidatesInitiated');
@@ -92,6 +105,10 @@ export class AppComponent implements OnInit {
       this.activePoll = undefined;
       this.polls = this.ps.getPolls();
     }); */
+  }
+
+  givePermission() {
+    console.log(this.givePermissionForm.value.voterAddress);
   }
 
   refreshTemplateBody() {
@@ -141,7 +158,7 @@ export class AppComponent implements OnInit {
       apiMailKey: [environment.apiVsoftSendFromAddress, Validators.required],
       apiNameKey: [environment.apiVsoftSendFromName, Validators.required],
     });
-    console.log(this.form.value);
+    // console.log(this.form.value);
   }
 
   sendEmail() {

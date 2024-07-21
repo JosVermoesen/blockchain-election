@@ -66,7 +66,7 @@ export class Web3Service {
         this.setContractReady(false);
       }
     } catch (error) {
-      console.log('Error: ', error);
+      alert('Error: ' + error);
       this.setContractReady(false);
     }
   }
@@ -100,7 +100,7 @@ export class Web3Service {
     this.contract.methods[fnName](...args)
       .send({ from: acc })
       .on('transactionHash', (hash: any) => {
-        console.log('Transaction hash', hash);
+       // console.log('Transaction hash', hash);
       });
     this.setWeb3Busy(false);
   }

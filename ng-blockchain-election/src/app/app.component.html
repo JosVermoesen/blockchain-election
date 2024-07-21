@@ -64,6 +64,7 @@
     <div>
       Hello, {{ myAddress }}
       <!-- Modal Button -->
+      @if (!isChairPerson) {
       <button
         type="button"
         class="btn btn-secondary"
@@ -73,6 +74,16 @@
       >
         Ask permission to vote
       </button>
+      } @if(isChairPerson) {
+      <button
+        type="button"
+        class="btn btn-secondary"
+        data-bs-toggle="modal"
+        data-bs-target="#givePermissionModal"
+      >
+        Give permission to vote
+      </button>
+      }
     </div>
   </div>
   <br />
@@ -136,7 +147,7 @@
   </div>
 </section>
 
-<!-- PermissionModal -->
+<!-- GetPermissionModal -->
 <div class="modal fade" id="myPermissionModal">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -176,6 +187,43 @@
               data-bs-dismiss="modal"
             >
               {{ sendEmailCaption }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GivePermissionModal -->
+<div class="modal fade" id="givePermissionModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="myModalLabel">
+          Allow to vote
+        </h1>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="givePermissionForm" (ngSubmit)="givePermission()">
+          <div class="mb-3">
+            <label class="form-label">Voters Address</label>
+            <input
+              formControlName="voterAddress"
+              type="text"
+              class="form-control"
+            />
+          </div>
+
+          <div class="modal-footer">
+            <button
+              [disabled]="!givePermissionForm.valid"
+              type="submit"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+            >
+              {{ givePermissionCaption }}
             </button>
           </div>
         </form>

@@ -30,7 +30,7 @@ export class ElectionService {
 
   async getCandidates(): Promise<ICandidateStruct[]> {
     const candidatesCount: number = await this.web3.call('candidatesCount');
-    console.log('candidatesCount', candidatesCount);
+    // console.log('candidatesCount', candidatesCount);
     
     for (let c = 0; c < candidatesCount; c++) {
       const candidate: any = await this.web3.call('getCandidate', c);
