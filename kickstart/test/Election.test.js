@@ -249,5 +249,19 @@ describe("Election Contract", () => {
     } catch (error) {
       console.log("error: ", error.message);
     }
+
+    try {
+      const votedAlready = await election.methods
+        .votedAlready(accounts[4])
+        .call();
+
+      assert.equal(true, votedAlready);
+
+      const votedAlready2 = await election.methods
+        .votedAlready(accounts[9])
+        .call();
+
+      assert.equal(false, votedAlready2);
+    } catch (error) {}
   });
 });

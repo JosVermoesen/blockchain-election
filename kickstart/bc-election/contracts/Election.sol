@@ -33,7 +33,7 @@ contract Election {
 
     event CandidatesInitiated();
     event GiveRightToVote();
-    event CandidateVoted();    
+    event CandidateVoted();
 
     constructor() {
         chairperson = msg.sender;
@@ -88,6 +88,20 @@ contract Election {
             canVote_ = true;
         }
         return canVote_;
+    }
+
+    /**
+     * @dev Calls votedAlready() function to check if citizen already voted
+     * @return votedAlready_ true or false
+     */
+    function votedAlready(
+        address _citizen
+    ) public view returns (bool votedAlready_) {
+        votedAlready_ = false;
+        if (voters[_citizen].voted != false) {
+            votedAlready_ = true;
+        }
+        return votedAlready_;
     }
 
     /**
