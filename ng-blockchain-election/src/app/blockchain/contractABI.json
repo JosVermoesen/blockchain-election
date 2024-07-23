@@ -13,6 +13,12 @@
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [],
+    "name": "GiveRightToVote",
+    "type": "event"
+  },
+  {
     "inputs": [
       { "internalType": "address", "name": "_citizen", "type": "address" }
     ],

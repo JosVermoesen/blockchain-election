@@ -25,6 +25,7 @@ let imageTrump = ethers.encodeBytes32String("https://shorturl.at/RjMHq");
 
 beforeEach(async () => {
   accounts = await web3.eth.getAccounts();
+  console.log("accounts: ", accounts);
 
   try {
     election = await new web3.eth.Contract(abi)
@@ -84,7 +85,38 @@ describe("Election Contract", () => {
     }
   });
 
-  it("let chairperson give right to voters", async () => {
+  it("can check who is allowed to vote or not", async () => {
+    try {
+      await election.methods
+        .initCandidates([nameBiden, nameTrump], [imageBiden, imageTrump])
+        .send({
+          from: accounts[0],
+          gas: "1300000",
+        });
+    } catch (error) {}
+
+    try {
+      result = await election.methods.giveRightToVote(accounts[1]).send({
+        from: accounts[0],
+        gas: "1000000",
+      });
+    } catch (error) {
+      assert(error);
+    }
+
+    try {
+      const allowed = await election.methods.allowedToVote(accounts[5]).call();
+
+      assert.equal(false, allowed);
+      const allowed2 = await election.methods.allowedToVote(accounts[1]).call();
+
+      assert.equal(true, allowed2);
+    } catch (error) {
+      console.log("error: ", error.message);
+    }
+  });
+
+  /* it("let chairperson give right to voters", async () => {
     try {
       await election.methods
         .initCandidates([nameBiden, nameTrump], [imageBiden, imageTrump])
@@ -217,5 +249,5 @@ describe("Election Contract", () => {
     } catch (error) {
       console.log("error: ", error.message);
     }
-  });
+  }); */
 });

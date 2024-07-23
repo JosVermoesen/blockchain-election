@@ -54,7 +54,7 @@
   <h3>Election Contract (web3 v4.11.0)</h3>
   <small>Powered By Sepolia Testnet on Angular 18.1</small>
   <h5>** work in progress **</h5>
-  @if (busyWeb3 || busyMail) {
+  @if (busyWeb3 || busyMail || busyContract) {
   <div>
     <hr />
     <h3>One moment please...</h3>
@@ -64,7 +64,7 @@
     <div>
       Hello, {{ myAddress }}
       <!-- Modal Button -->
-      @if (!isChairPerson) {
+      @if (!(isChairPerson || canVote)) {
       <button
         type="button"
         class="btn btn-secondary"
@@ -73,6 +73,10 @@
         (click)="permissionForm.controls['voterAddress'].setValue(myAddress)"
       >
         Ask permission to vote
+      </button>
+      } @if (!isChairPerson && canVote) {
+      <button (click)="vote()" type="button" class="btn btn-secondary">
+        Click on candidate to vote'
       </button>
       } @if(isChairPerson) {
       <button
@@ -200,9 +204,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="myModalLabel">
-          Allow to vote
-        </h1>
+        <h1 class="modal-title fs-5" id="myModalLabel">Allow to vote</h1>
         <button class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">

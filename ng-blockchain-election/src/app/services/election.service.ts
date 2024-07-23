@@ -5,7 +5,6 @@ import { Web3Service } from './web3.service';
 import { ICandidatesInitial } from '../models/candidatesInitial';
 import { ICandidateStruct } from '../models/ICandidateStruct';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -28,10 +27,34 @@ export class ElectionService {
     console.log(result);
   }
 
+  // const allowed = await election.methods.allowedToVote(accounts[5]).call(); */
+
+  canVote(address: string) {
+    const result = this.web3.call('allowedToVote', address);
+    return result;
+  }
+
+  async giveRightToVote(address: string) {
+    await this.web3.executeTransaction('giveRightToVote', address);
+  }
+
+  /* async allowedToVote(): Promise<boolean> {
+    const result = await this.call('allowedToVote');
+    const acc = await this.getAccount();
+
+    if (chairperson == acc) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  const allowed = await election.methods.allowedToVote(accounts[5]).call(); */
+
   async getCandidates(): Promise<ICandidateStruct[]> {
     const candidatesCount: number = await this.web3.call('candidatesCount');
     // console.log('candidatesCount', candidatesCount);
-    
+
     for (let c = 0; c < candidatesCount; c++) {
       const candidate: any = await this.web3.call('getCandidate', c);
 
@@ -41,13 +64,11 @@ export class ElectionService {
         id: candidate[0],
         name: candidateName,
         imageUrl: candidateImage,
-        voteCount: candidate[3]
+        voteCount: candidate[3],
       });
     }
     return this.candidates;
   }
-
-
 
   /* async getCandidates(): Promise<Candidates[]> {
     const candidatesCount: number = await this.web3.call('candidatesCount');

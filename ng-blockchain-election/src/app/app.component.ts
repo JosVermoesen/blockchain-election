@@ -20,12 +20,17 @@ export class AppComponent implements OnInit {
 
   showFormStartElection = false;
 
+  canVote = false;
+  hasVoted = false;
+
   permissionForm!: FormGroup;
   form!: FormGroup;
   givePermissionForm!: FormGroup;
 
   busyWeb3 = false;
   busyMail = false;
+  busyContract = false;
+
   sendEmailCaption = 'Send';
   givePermissionCaption = 'Give Permission';
 
@@ -82,33 +87,50 @@ export class AppComponent implements OnInit {
     });
     this.chairPersonAddress = await this.ws.call('chairperson');
     this.myAddress = await this.ws.getAccount();
-    this.initialized = await this.ws.call('initialized');
 
+    this.initialized = await this.ws.call('initialized');
     if (this.initialized) {
       this.candidatesArray = await this.es.getCandidates();
       // console.log('candidates', this.candidatesArray);
-    } else {
-      this.es.onEvent('CandidatesInitiated').subscribe(() => {
-        console.log('CandidatesInitiated');
-        this.ws.setWeb3Busy(false);
-        this.candidatesToInit = this.es.getCandidates();
-      });
     }
 
-    /* this.es.onEvent('ElectionCreated').subscribe(() => {
-      this.showFormStartElection = false;
-      // this.polls = this.ps.getPolls();
-    }); */
+    this.es.onEvent('CandidatesInitiated').subscribe(() => {
+      this.busyWeb3 = false;
+      this.ws.setWeb3Busy(this.busyWeb3);
+      this.busyContract = false;
+      this.refresh();
+    });
 
-    /* this.ps.onEvent('PollVoted').subscribe(() => {
-      console.log('ok voted');
-      this.activePoll = undefined;
-      this.polls = this.ps.getPolls();
-    }); */
+    this.es.onEvent('GiveRightToVote').subscribe(() => {
+      this.busyWeb3 = false;
+      this.busyContract = false;
+      this.ws.setWeb3Busy(this.busyWeb3);
+      this.refresh();
+    });
+
+    this.es.onEvent('CandidateVoted').subscribe(() => {
+      this.busyWeb3 = false;
+      this.busyContract = false;
+      this.ws.setWeb3Busy(this.busyWeb3);
+      this.refresh();
+    });
+    this.refresh();
   }
 
-  givePermission() {
+  async refresh() {
+    this.canVote = await this.es.canVote(
+      '0xc8EdD419894Bb41738f9d1d91dE668b375F2624e'
+    );
+    console.log('canVote', this.canVote);
+    console.log('TODO: refreshing voting data');
+  }
+
+  async givePermission() {
+    this.busyContract = true;
+    this.busyWeb3 = true;
+    this.ws.setWeb3Busy(this.busyWeb3);
     console.log(this.givePermissionForm.value.voterAddress);
+    await this.es.giveRightToVote(this.givePermissionForm.value.voterAddress);
   }
 
   refreshTemplateBody() {
@@ -204,8 +226,13 @@ export class AppComponent implements OnInit {
 
   handleElectionCreate(candidatesInitial: ICandidatesInitial) {
     this.busyWeb3 = true;
+    this.busyContract = true;
     this.ws.setWeb3Busy(this.busyWeb3);
     this.es.createElection(candidatesInitial);
+  }
+
+  vote() {
+    alert('TODO: voting');
   }
 
   /* handlePollVote(pollVoted: PollVote) {
