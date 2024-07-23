@@ -116,7 +116,7 @@ describe("Election Contract", () => {
     }
   });
 
-  /* it("let chairperson give right to voters", async () => {
+  it("let chairperson give right to voters", async () => {
     try {
       await election.methods
         .initCandidates([nameBiden, nameTrump], [imageBiden, imageTrump])
@@ -249,5 +249,5 @@ describe("Election Contract", () => {
     } catch (error) {
       console.log("error: ", error.message);
     }
-  }); */
+  });
 });
