@@ -3,7 +3,7 @@
 ## Getting started for developers
 
 - [Install NodeJS](https://nodejs.org/). Hint: eventually install and use [nvm](https://medium.com/@Joachim8675309/installing-node-js-with-nvm-4dc469c977d9) for easy installing and/or switching between node versions
-- Clone this repository: `git clone https://github.com/JosVermoesen/ng-blockchain-poll`.
+- Clone this repository: `git clone https://github.com/JosVermoesen/ng-blockchain-election`.
 - Run `npm install` inside the project root.
 - Run `ng serve` or `npm start` in a terminal from the project root.
 - Profit. :tada:
