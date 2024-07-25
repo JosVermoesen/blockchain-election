@@ -125,6 +125,17 @@
     "type": "function"
   },
   {
+    "inputs": [
+      { "internalType": "address", "name": "_citizen", "type": "address" }
+    ],
+    "name": "votedAlready",
+    "outputs": [
+      { "internalType": "bool", "name": "votedAlready_", "type": "bool" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "name": "voters",
     "outputs": [

@@ -1,6 +1,11 @@
 <!-- Card With Image -->
 <div class="card mx-1" style="width: 20rem">
-  <img [src]="candidateImage" class="card-img-top" alt="{{ candidateName }}" />
+  <img
+    (click)="vote(candidateId)"
+    [src]="candidateImage"
+    class="card-img-top"
+    alt="{{ candidateName }}"
+  />
   <div class="card-body">
     <h5 class="card-title">{{ candidateId }}: {{ candidateName }}</h5>
     <p class="card-text">Votes: {{ candidateVotes }}</p>

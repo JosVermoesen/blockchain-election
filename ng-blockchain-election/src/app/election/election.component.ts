@@ -1,4 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Web3Service } from '../services/web3.service';
+import { ElectionService } from '../services/election.service';
+import { waitForAsync } from '@angular/core/testing';
 
 @Component({
   selector: 'app-election',
@@ -14,20 +17,26 @@ export class ElectionComponent implements OnInit {
   @Input()
   candidateVotes?: number;
 
-  /* @Input()
-  votes: number[] = []; // [0, 1, 5, 7]
-  @Input()
-  voted!: boolean; */
+  myAddress = '';
+  canVote = false;
+  hasVoted = false;
 
-  numberOfVotes!: number;
+  constructor(private ws: Web3Service, private es: ElectionService) {}
 
-  constructor() {}
+  async ngOnInit() {
+    this.myAddress = await this.ws.getAccount();
+    this.canVote = await this.es.canVote(this.myAddress);
+    this.hasVoted = await this.es.hasVoted(this.myAddress);
+  }
 
-  ngOnInit(): void {
-    /* if (this.votes.length) {
-      this.numberOfVotes = this.votes.reduce((acc, curr) => {
-        return (acc += curr);
-      });
-    } */
+  async vote(candidateId: number | undefined) {
+    this.ws.setWeb3Busy(true);
+
+
+  
+    console.log('vote', candidateId);
+    
+
+    // await this.es.vote(candidateId);
   }
 }

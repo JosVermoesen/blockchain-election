@@ -27,15 +27,18 @@ export class ElectionService {
     console.log(result);
   }
 
-  // const allowed = await election.methods.allowedToVote(accounts[5]).call(); */
+  async giveRightToVote(address: string) {
+    await this.web3.executeTransaction('giveRightToVote', address);
+  }
 
   canVote(address: string) {
     const result = this.web3.call('allowedToVote', address);
     return result;
   }
 
-  async giveRightToVote(address: string) {
-    await this.web3.executeTransaction('giveRightToVote', address);
+  hasVoted(address: string) {
+    const result = this.web3.call('votedAlready', address);
+    return result;
   }
 
   /* async allowedToVote(): Promise<boolean> {

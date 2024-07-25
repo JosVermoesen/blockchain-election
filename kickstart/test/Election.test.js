@@ -14,6 +14,8 @@ let nameBiden = ethers.encodeBytes32String("Joe Biden");
 let nameTrump = ethers.encodeBytes32String("Donald Trump");
 // "0x446f6e616c64205472756d700000000000000000000000000000000000000000";
 
+// ["0x4a6f6520426964656e0000000000000000000000000000000000000000000000","0x446f6e616c64205472756d700000000000000000000000000000000000000000"]
+
 // https://www.shorturl.at/
 //'https://blockchain-election.vsoft.be/images/Joe_Biden.jpg'
 // https://shorturl.at/hvfax
@@ -22,6 +24,10 @@ let imageBiden = ethers.encodeBytes32String("https://shorturl.at/hvfax");
 // https://shorturl.at/RjMHq
 let shortUrlTrump = "https://shorturl.at/RjMHq";
 let imageTrump = ethers.encodeBytes32String("https://shorturl.at/RjMHq");
+
+// console.log(imageBiden);
+// console.log(imageTrump);
+// ["0x68747470733a2f2f73686f727475726c2e61742f687666617800000000000000","0x68747470733a2f2f73686f727475726c2e61742f526a4d487100000000000000"]
 
 beforeEach(async () => {
   accounts = await web3.eth.getAccounts();
@@ -34,7 +40,7 @@ beforeEach(async () => {
       })
       .send({
         from: accounts[0],
-        gas: "1500000",
+        gas: "2000000",
       });
   } catch (error) {
     console.log("error: ", error);
@@ -56,7 +62,7 @@ describe("Election Contract", () => {
         .initCandidates([nameBiden, nameTrump], [imageBiden, imageTrump])
         .send({
           from: accounts[1],
-          gas: "1300000",
+          gas: "2000000",
         });
     } catch (error) {
       assert(error);
@@ -69,7 +75,7 @@ describe("Election Contract", () => {
         .initCandidates([nameBiden, nameTrump], [imageBiden, imageTrump])
         .send({
           from: accounts[0],
-          gas: "1300000",
+          gas: "2000000",
         });
     } catch (error) {}
 
@@ -78,7 +84,7 @@ describe("Election Contract", () => {
         .initCandidates([nameBiden, nameTrump], [imageBiden, imageTrump])
         .send({
           from: accounts[0],
-          gas: "1300000",
+          gas: "2000000",
         });
     } catch (error) {
       assert(error);
@@ -91,7 +97,7 @@ describe("Election Contract", () => {
         .initCandidates([nameBiden, nameTrump], [imageBiden, imageTrump])
         .send({
           from: accounts[0],
-          gas: "1300000",
+          gas: "2000000",
         });
     } catch (error) {}
 
@@ -122,31 +128,31 @@ describe("Election Contract", () => {
         .initCandidates([nameBiden, nameTrump], [imageBiden, imageTrump])
         .send({
           from: accounts[0],
-          gas: "1300000",
+          gas: "2000000",
         });
     } catch (error) {}
 
     await election.methods.giveRightToVote(accounts[1]).send({
       from: accounts[0],
-      gas: "1000000",
+      gas: "2000000",
     });
     await election.methods.giveRightToVote(accounts[2]).send({
       from: accounts[0],
-      gas: "1000000",
+      gas: "2000000",
     });
     await election.methods.giveRightToVote(accounts[3]).send({
       from: accounts[0],
-      gas: "1000000",
+      gas: "2000000",
     });
     await election.methods.giveRightToVote(accounts[4]).send({
       from: accounts[0],
-      gas: "1000000",
+      gas: "2000000",
     });
 
     try {
       const vote1 = await election.methods.vote(0).send({
         from: accounts[1],
-        gas: "1000000",
+        gas: "2000000",
       });
     } catch (error) {
       console.log("error: ", error);
@@ -155,7 +161,7 @@ describe("Election Contract", () => {
     try {
       const vote2 = await election.methods.vote(1).send({
         from: accounts[2],
-        gas: "1000000",
+        gas: "2000000",
       });
     } catch (error) {
       console.log("error: ", error);
@@ -164,7 +170,7 @@ describe("Election Contract", () => {
     try {
       const vote3 = await election.methods.vote(1).send({
         from: accounts[3],
-        gas: "1000000",
+        gas: "2000000",
       });
     } catch (error) {
       console.log("error: ", error);
@@ -173,7 +179,7 @@ describe("Election Contract", () => {
     try {
       const vote4 = await election.methods.vote(1).send({
         from: accounts[4],
-        gas: "1000000",
+        gas: "2000000",
       });
     } catch (error) {
       console.log("error: ", error);
@@ -192,7 +198,7 @@ describe("Election Contract", () => {
     try {
       const winner = await election.methods.winningCandidate().send({
         from: accounts[0],
-        gas: "1000000",
+        gas: "2000000",
       });
       // console.log("winner: ", winner);
     } catch (error) {
@@ -202,7 +208,7 @@ describe("Election Contract", () => {
     try {
       const winnerName = await election.methods.winnerName().call({
         from: accounts[4],
-        gas: "1000000",
+        gas: "2000000",
       });
 
       assert.equal("Donald Trump", ethers.decodeBytes32String(winnerName));
@@ -213,7 +219,7 @@ describe("Election Contract", () => {
     try {
       const winnerImage = await election.methods.winnerImage().call({
         from: accounts[4],
-        gas: "1000000",
+        gas: "2000000",
       });
 
       assert.equal(imgageTrump, ethers.decodeBytes32String(winnerImage));

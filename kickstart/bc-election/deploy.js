@@ -19,7 +19,7 @@ const deploy = async () => {
 
   const result = await new web3.eth.Contract(abi)
     .deploy({ data: evm.bytecode.object })
-    .send({ gas: "1500000", from: accounts[0] });
+    .send({ gas: "2000000", from: accounts[0] });
 
   // console.log(JSON.stringify(abi));
   console.log("Contract deployed to", result.options.address);
@@ -27,6 +27,7 @@ const deploy = async () => {
 };
 deploy();
 
-// 0x80639F8EA1e0A6da4E2Edc53473089DB98978b60 - contract address 2024-07-08
-// 0xad6C120F1aFe8Ffda1f1F7B033C67A80947ffFD4 - contract address 2024-07-13
+// 0x9059F2432573DD5Fb37b040c6edfabcC0E4bBd1c - contract address 2024-07-24
 // 0x640a3a043eC80Ee86A1D69EF94f3bf66a59C52Cd - contract address 2024-07-23
+// 0xad6C120F1aFe8Ffda1f1F7B033C67A80947ffFD4 - contract address 2024-07-13
+// 0x80639F8EA1e0A6da4E2Edc53473089DB98978b60 - contract address 2024-07-08

@@ -54,12 +54,7 @@
   <h3>Election Contract (web3 v4.11.0)</h3>
   <small>Powered By Sepolia Testnet on Angular 18.1</small>
   <h5>** work in progress **</h5>
-  @if (busyWeb3 || busyMail || busyContract) {
-  <div>
-    <hr />
-    <h3>One moment please...</h3>
-  </div>
-  } @if (initialized) {
+  @if (initialized) {
   <div class="container">
     <div>
       Hello, {{ myAddress }}
@@ -108,13 +103,19 @@
   <div class="container">
     <div class="card-group">
       <app-election
-        *ngFor="let candidate of candidatesArray"
-        [candidateId]="candidate.id"
+        *ngFor="let candidate of candidatesArray; index as candidateId"
+        [candidateId]="candidateId"
         [candidateName]="candidate.name"
         [candidateImage]="candidate.imageUrl"
         [candidateVotes]="candidate.voteCount"
       ></app-election>
     </div>
+    @if (busyWeb3 || busyMail || busyContract) {
+    <div>
+      <hr />
+      <h3>One moment please...</h3>
+    </div>
+    }
   </div>
   }
 </section>

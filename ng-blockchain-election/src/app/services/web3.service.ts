@@ -34,7 +34,7 @@ export class Web3Service {
 
   private web3 = new Web3(window.ethereum);
   private contract!: any;
-  private contractAddress = '0x640a3a043eC80Ee86A1D69EF94f3bf66a59C52Cd';
+  private contractAddress = '0x9059F2432573DD5Fb37b040c6edfabcC0E4bBd1c';
   // 0xad6C120F1aFe8Ffda1f1F7B033C67A80947ffFD4 - contract address 2024-07-13
   // 0x80639F8EA1e0A6da4E2Edc53473089DB98978b60 - contract address 2024-07-08
   // 0x640a3a043eC80Ee86A1D69EF94f3bf66a59C52Cd - contract address 2024-07-23
@@ -95,7 +95,6 @@ export class Web3Service {
     }
   }
 
-  
   async executeTransaction(fnName: string, ...args: any[]): Promise<void> {
     this.setWeb3Busy(true);
     const acc = await this.getAccount();

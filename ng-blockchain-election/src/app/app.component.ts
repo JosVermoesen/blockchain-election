@@ -121,7 +121,67 @@ export class AppComponent implements OnInit {
     this.canVote = await this.es.canVote(
       '0xc8EdD419894Bb41738f9d1d91dE668b375F2624e'
     );
-    console.log('canVote', this.canVote);
+    console.log(
+      '0xc8EdD419894Bb41738f9d1d91dE668b375F2624e canVote: ',
+      this.canVote
+    );
+    this.hasVoted = await this.es.hasVoted(
+      '0xc8EdD419894Bb41738f9d1d91dE668b375F2624e'
+    );
+    console.log(
+      '0xc8EdD419894Bb41738f9d1d91dE668b375F2624e hasVoted: ',
+      this.hasVoted
+    );
+    console.log('1 ----------------------------');
+
+    this.canVote = await this.es.canVote(
+      '0x6d6CBf5754b33D7Ba0A67C4fb294a2cd267dC6ea'
+    );
+    console.log(
+      '0x6d6CBf5754b33D7Ba0A67C4fb294a2cd267dC6ea canVote: ',
+      this.canVote
+    );
+    this.hasVoted = await this.es.hasVoted(
+      '0x6d6CBf5754b33D7Ba0A67C4fb294a2cd267dC6ea'
+    );
+    console.log(
+      '0x6d6CBf5754b33D7Ba0A67C4fb294a2cd267dC6ea hasVoted: ',
+      this.hasVoted
+    );
+    console.log('2 ----------------------------');
+
+    this.canVote = await this.es.canVote(
+      '0x8aA106b195F5A21c1eC5a4D78c16D6851cc59640'
+    );
+    console.log(
+      '0x8aA106b195F5A21c1eC5a4D78c16D6851cc59640 canVote: ',
+      this.canVote
+    );
+    this.hasVoted = await this.es.hasVoted(
+      '0x8aA106b195F5A21c1eC5a4D78c16D6851cc59640'
+    );
+    console.log(
+      '0x8aA106b195F5A21c1eC5a4D78c16D6851cc59640 hasVoted: ',
+      this.hasVoted
+    );
+    console.log('3 ----------------------------');
+
+    this.canVote = await this.es.canVote(
+      '0xa43c75770d2d2e21637F1dc70964D57155656fA8'
+    );
+    console.log(
+      '0xa43c75770d2d2e21637F1dc70964D57155656fA8 canVote: ',
+      this.canVote
+    );
+    this.hasVoted = await this.es.hasVoted(
+      '0xa43c75770d2d2e21637F1dc70964D57155656fA8'
+    );
+    console.log(
+      '0xa43c75770d2d2e21637F1dc70964D57155656fA8 hasVoted: ',
+      this.hasVoted
+    );
+    console.log('4 ----------------------------');
+
     console.log('TODO: refreshing voting data');
   }
 
