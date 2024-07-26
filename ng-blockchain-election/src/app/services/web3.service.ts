@@ -21,17 +21,6 @@ export class Web3Service {
     return this.isContractReadySource.value;
   }
 
-  private isWeb3BusySource = new BehaviorSubject<boolean | null>(false);
-  isWeb3Busy$ = this.isWeb3BusySource.asObservable();
-
-  setWeb3Busy(isWeb3Busy: boolean) {
-    this.isWeb3BusySource.next(isWeb3Busy);
-  }
-
-  getWeb3Busy() {
-    return this.isWeb3BusySource.value;
-  }
-
   private web3 = new Web3(window.ethereum);
   private contract!: any;
   private contractAddress = '0x9059F2432573DD5Fb37b040c6edfabcC0E4bBd1c';
@@ -96,14 +85,14 @@ export class Web3Service {
   }
 
   async executeTransaction(fnName: string, ...args: any[]): Promise<void> {
-    this.setWeb3Busy(true);
+    this.setContractReady(false);
     const acc = await this.getAccount();
     this.contract.methods[fnName](...args)
       .send({ from: acc })
       .on('transactionHash', (hash: any) => {
-       console.log('Transaction hash', hash);
+        console.log('Transaction hash', hash);
       });
-    this.setWeb3Busy(false);
+    this.setContractReady(true);
   }
 
   async call(fnName: string, ...args: any[]) {

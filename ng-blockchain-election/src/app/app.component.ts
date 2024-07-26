@@ -27,9 +27,7 @@ export class AppComponent implements OnInit {
   form!: FormGroup;
   givePermissionForm!: FormGroup;
 
-  busyWeb3 = false;
-  busyMail = false;
-  busyContract = false;
+  contractReady = false;
 
   sendEmailCaption = 'Send';
   givePermissionCaption = 'Give Permission';
@@ -53,12 +51,12 @@ export class AppComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private es: ElectionService,
-    private ws: Web3Service,
+    public ws: Web3Service,
     private http: HttpClient,
     private ms: MailService
   ) {
-    this.ws.isWeb3Busy$.subscribe((isBusy) => {
-      this.busyWeb3 = isBusy || false;
+    this.ws.isContractReady$.subscribe((result) => {
+      this.contractReady = result || false;
     });
   }
 
@@ -95,23 +93,20 @@ export class AppComponent implements OnInit {
     }
 
     this.es.onEvent('CandidatesInitiated').subscribe(() => {
-      this.busyWeb3 = false;
-      this.ws.setWeb3Busy(this.busyWeb3);
-      this.busyContract = false;
+      this.contractReady = true;
+      this.ws.setContractReady(false);
       this.refresh();
     });
 
     this.es.onEvent('GiveRightToVote').subscribe(() => {
-      this.busyWeb3 = false;
-      this.busyContract = false;
-      this.ws.setWeb3Busy(this.busyWeb3);
+      this.contractReady = true;
+      this.ws.setContractReady(false);
       this.refresh();
     });
 
     this.es.onEvent('CandidateVoted').subscribe(() => {
-      this.busyWeb3 = false;
-      this.busyContract = false;
-      this.ws.setWeb3Busy(this.busyWeb3);
+      this.contractReady = true;
+      this.ws.setContractReady(false);
       this.refresh();
     });
     this.refresh();
@@ -181,14 +176,16 @@ export class AppComponent implements OnInit {
       this.hasVoted
     );
     console.log('4 ----------------------------');
-
     console.log('TODO: refreshing voting data');
+
+    // back to the original address
+    this.canVote = await this.es.canVote(this.myAddress);
+    this.hasVoted = await this.es.hasVoted(this.myAddress);
   }
 
   async givePermission() {
-    this.busyContract = true;
-    this.busyWeb3 = true;
-    this.ws.setWeb3Busy(this.busyWeb3);
+    this.contractReady = false;
+    this.ws.setContractReady(this.contractReady);
     console.log(this.givePermissionForm.value.voterAddress);
     await this.es.giveRightToVote(this.givePermissionForm.value.voterAddress);
   }
@@ -261,15 +258,15 @@ export class AppComponent implements OnInit {
     this.refreshTemplateBody();
     // console.log(this.form.value);
     this.contactMail = Object.assign({}, this.form.value);
-    this.busyMail = true;
+    this.contractReady = false;
     this.ms.sendMail(this.contactMail).subscribe({
       next: () => {},
       error: () => {
         this.toastr.error('Mail not sent!');
-        this.busyMail = false;
+        this.contractReady = true;
       },
       complete: () => {
-        this.busyMail = false;
+        this.contractReady = true;
         this.permissionForm.reset();
         this.toastr.success('Done!');
       },
@@ -285,9 +282,8 @@ export class AppComponent implements OnInit {
   } */
 
   handleElectionCreate(candidatesInitial: ICandidatesInitial) {
-    this.busyWeb3 = true;
-    this.busyContract = true;
-    this.ws.setWeb3Busy(this.busyWeb3);
+    this.contractReady = false;
+    this.ws.setContractReady(this.contractReady);
     this.es.createElection(candidatesInitial);
   }
 

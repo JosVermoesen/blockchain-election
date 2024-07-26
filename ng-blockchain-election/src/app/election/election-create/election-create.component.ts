@@ -10,21 +10,20 @@ import { ICandidatesInitial } from 'src/app/models/candidatesInitial';
 
 import { Web3Service } from 'src/app/services/web3.service';
 
-
 @Component({
   selector: 'app-election-create',
   templateUrl: './election-create.component.html',
 })
 export class ElectionCreateComponent {
   Candidates: UntypedFormGroup;
-  busyWeb3 = false;
+  contractReady = false;
 
   @Output() electionCreated: EventEmitter<ICandidatesInitial> =
     new EventEmitter();
 
   constructor(private fb: UntypedFormBuilder, private ws: Web3Service) {
-    this.ws.isWeb3Busy$.subscribe((isBusy) => {
-      this.busyWeb3 = isBusy || false;
+    this.ws.isContractReady$.subscribe((result) => {
+      this.contractReady = result || false;
     });
 
     this.Candidates = this.fb.group({
@@ -76,7 +75,7 @@ export class ElectionCreateComponent {
       images: candidateImages,
     };
 
-    this.ws.setWeb3Busy(true);
+    this.ws.setContractReady(false);
     this.electionCreated.emit(formData);
   }
 }

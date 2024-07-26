@@ -59,7 +59,8 @@
     <div>
       Hello, {{ myAddress }}
       <!-- Modal Button -->
-      @if (!(isChairPerson || canVote)) {
+      @if (contractReady) { @if ((!isChairPerson
+      &&!canVote)) {
       <button
         type="button"
         class="btn btn-secondary"
@@ -69,7 +70,7 @@
       >
         Ask permission to vote
       </button>
-      } @if (!isChairPerson && canVote) {
+      } @if (!isChairPerson && canVote && !hasVoted) {
       <button (click)="vote()" type="button" class="btn btn-secondary">
         Click on candidate to vote'
       </button>
@@ -83,6 +84,10 @@
         Give permission to vote
       </button>
       }
+      @if (hasVoted) {
+        you have voted already
+      }
+     }
     </div>
   </div>
   <br />
@@ -110,7 +115,7 @@
         [candidateVotes]="candidate.voteCount"
       ></app-election>
     </div>
-    @if (busyWeb3 || busyMail || busyContract) {
+    @if (!contractReady) {
     <div>
       <hr />
       <h3>One moment please...</h3>
@@ -118,38 +123,6 @@
     }
   </div>
   }
-</section>
-
-<section id="poll-history">
-  <div class="container">
-    <div class="row">
-      <div class="d-flex">
-        <div class="container poll-list">
-          <div></div>
-        </div>
-
-        <div class="container poll-split">
-          <div class="col-ld-1"></div>
-        </div>
-
-        <div class="container poll-detail">
-          <div class="col-ld-5">
-            <div *ngIf="!showFormStartElection">
-              <!-- <app-poll-vote
-                *ngIf="activePoll"
-                [id]="activePoll.id"
-                [voted]="activePoll.voted"
-                [question]="activePoll.question"
-                [options]="activePoll.options"
-                [results]="activePoll.results"
-                (pollVoted)="handlePollVote($event)"
-              ></app-poll-vote> -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- GetPermissionModal -->
