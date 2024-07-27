@@ -1,4 +1,4 @@
 export interface ICandidatesInitial {
-  names: string[]; // ["Joe Biden", "Donald Trump"]
+  names: string[]; // ["Kamala Harris", "Donald Trump"]
   images: string[]; // ["https://image.png", "https://image.png"]
 }

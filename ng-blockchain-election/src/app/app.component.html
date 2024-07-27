@@ -69,9 +69,8 @@
         Ask permission to vote
       </button>
       } @if (!isChairPerson && canVote && !hasVoted) {
-      <button (click)="vote()" type="button" class="btn btn-secondary">
-        Click on candidate to vote'
-      </button>
+      <div class="text-info">Click on candidate to vote</div>
+
       } @if(isChairPerson) {
       <button
         type="button"
@@ -81,7 +80,9 @@
       >
         Give permission to vote
       </button>
-      } @if (hasVoted) { you have voted already } }
+      } @if (hasVoted) {
+      <div class="text-success">You have voted already</div>
+      } }
     </div>
   </div>
   <br />
@@ -98,7 +99,7 @@
 </section>
 
 <section id="candidates">
-  @if (!showFormStartElection) {
+  @if (!showFormStartElection && candidatesArray.length > 0) {
   <div class="container">
     <div class="card-group">
       <app-election

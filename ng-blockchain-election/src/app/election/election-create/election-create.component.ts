@@ -52,10 +52,10 @@ export class ElectionCreateComponent {
 
   example() {
     this.Candidates.patchValue({
-      nameCandidate1: 'Joe Biden',
-      imageCandidate1: 'https://shorturl.at/W3Lji',
+      nameCandidate1: 'Kamala Harris',
+      imageCandidate1: 'https://shorturl.at/92kSq',
       nameCandidate2: 'Donald Trump',
-      imageCandidate2: 'https://shorturl.at/ysx0p',
+      imageCandidate2: 'https://shorturl.at/uKwGI',
     });
   }
 

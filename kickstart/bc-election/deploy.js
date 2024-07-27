@@ -27,6 +27,7 @@ const deploy = async () => {
 };
 deploy();
 
+// 0x028E077A7c0f74599576cD2296a94D91A2260995 - contract address 2024-07-27
 // 0x9059F2432573DD5Fb37b040c6edfabcC0E4bBd1c - contract address 2024-07-24
 // 0x640a3a043eC80Ee86A1D69EF94f3bf66a59C52Cd - contract address 2024-07-23
 // 0xad6C120F1aFe8Ffda1f1F7B033C67A80947ffFD4 - contract address 2024-07-13

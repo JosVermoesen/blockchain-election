@@ -8,12 +8,12 @@ if (environment.production) {
   enableProdMode();
 
   // disable any console.log debugging statements in production mode
-  /* window.console.log = function () {
+  window.console.log = function () {
     ('');
   };
   window.console.error = function () {
     ('');
-  }; */
+  };
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule)

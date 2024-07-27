@@ -9,25 +9,29 @@ const { abi, evm } = require("../bc-election/compile");
 let election;
 let accounts;
 
-let nameBiden = ethers.encodeBytes32String("Joe Biden");
-// "0x4a6f6520426964656e0000000000000000000000000000000000000000000000";
-let nameTrump = ethers.encodeBytes32String("Donald Trump");
-// "0x446f6e616c64205472756d700000000000000000000000000000000000000000";
+let nameHarris = ethers.encodeBytes32String("Kamala Harris");
+// console.log("name Harris: ", nameHarris);
 
-// ["0x4a6f6520426964656e0000000000000000000000000000000000000000000000","0x446f6e616c64205472756d700000000000000000000000000000000000000000"]
+let nameTrump = ethers.encodeBytes32String("Donald Trump");
+// console.log("name Trump: ", nameTrump);
+
+// Bytes32 encoded for the names
+// ["0x4b616d616c612048617272697300000000000000000000000000000000000000","0x446f6e616c64205472756d700000000000000000000000000000000000000000"]
 
 // https://www.shorturl.at/
-//'https://blockchain-election.vsoft.be/images/Joe_Biden.jpg'
-// https://shorturl.at/hvfax
-let imageBiden = ethers.encodeBytes32String("https://shorturl.at/hvfax");
-//'https://blockchain-election.vsoft.be/images/Donald_Trump.jpg'
-// https://shorturl.at/RjMHq
-let shortUrlTrump = "https://shorturl.at/RjMHq";
-let imageTrump = ethers.encodeBytes32String("https://shorturl.at/RjMHq");
 
-// console.log(imageBiden);
-// console.log(imageTrump);
-// ["0x68747470733a2f2f73686f727475726c2e61742f687666617800000000000000","0x68747470733a2f2f73686f727475726c2e61742f526a4d487100000000000000"]
+//'https://blockchain-elections.vsoft.be/images/Kamala_Harris.jpg'
+// https://shorturl.at/92kSq
+let imageHarris = ethers.encodeBytes32String("https://shorturl.at/92kSq");
+// console.log("image Harris: ", imageHarris);
+
+//'https://blockchain-elections.vsoft.be/images/Donald_Trump.jpg'
+// https://shorturl.at/uKwGI
+let imageTrump = ethers.encodeBytes32String("https://shorturl.at/uKwGI");
+// console.log("image Trump: ", imageTrump);
+
+// Bytes32 encoded for the images
+// ["0x68747470733a2f2f73686f727475726c2e61742f7465696a7600000000000000","0x68747470733a2f2f73686f727475726c2e61742f526a4d487100000000000000"]
 
 beforeEach(async () => {
   accounts = await web3.eth.getAccounts();
@@ -59,7 +63,7 @@ describe("Election Contract", () => {
   it("only chairperson can initialize", async () => {
     try {
       await election.methods
-        .initCandidates([nameBiden, nameTrump], [imageBiden, imageTrump])
+        .initCandidates([nameHarris, nameTrump], [imageHarris, imageTrump])
         .send({
           from: accounts[1],
           gas: "2000000",
@@ -72,7 +76,7 @@ describe("Election Contract", () => {
   it("chairperson can initialize only once", async () => {
     try {
       await election.methods
-        .initCandidates([nameBiden, nameTrump], [imageBiden, imageTrump])
+        .initCandidates([nameHarris, nameTrump], [imageHarris, imageTrump])
         .send({
           from: accounts[0],
           gas: "2000000",
@@ -81,7 +85,7 @@ describe("Election Contract", () => {
 
     try {
       await election.methods
-        .initCandidates([nameBiden, nameTrump], [imageBiden, imageTrump])
+        .initCandidates([nameHarris, nameTrump], [imageHarris, imageTrump])
         .send({
           from: accounts[0],
           gas: "2000000",
@@ -94,7 +98,7 @@ describe("Election Contract", () => {
   it("can check who is allowed to vote or not", async () => {
     try {
       await election.methods
-        .initCandidates([nameBiden, nameTrump], [imageBiden, imageTrump])
+        .initCandidates([nameHarris, nameTrump], [imageHarris, imageTrump])
         .send({
           from: accounts[0],
           gas: "2000000",
@@ -125,7 +129,7 @@ describe("Election Contract", () => {
   it("let chairperson give right to voters", async () => {
     try {
       await election.methods
-        .initCandidates([nameBiden, nameTrump], [imageBiden, imageTrump])
+        .initCandidates([nameHarris, nameTrump], [imageHarris, imageTrump])
         .send({
           from: accounts[0],
           gas: "2000000",
@@ -269,5 +273,5 @@ describe("Election Contract", () => {
 
       assert.equal(false, votedAlready2);
     } catch (error) {}
-  });
+  }); 
 });

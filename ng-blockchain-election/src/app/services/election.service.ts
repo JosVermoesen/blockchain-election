@@ -42,7 +42,7 @@ export class ElectionService {
     await this.web3.executeTransaction('giveRightToVote', address);
   }
 
-  async voteFor(address: string, voteCandidate: number) {    
+  async voteFor(address: string, voteCandidate: number) {
     const result = await this.web3.executeTransaction('vote', voteCandidate);
     console.log(result);
   }
@@ -57,11 +57,9 @@ export class ElectionService {
     return result;
   }
 
-  async getCandidates(): Promise<ICandidateStruct[]> {
+  async setCandidates(): Promise<ICandidateStruct[]> {    
     const candidatesCount: number = await this.web3.call('candidatesCount');
     // console.log('candidatesCount', candidatesCount);
-
-    this.candidates = [];
 
     for (let c = 0; c < candidatesCount; c++) {
       const candidate: any = await this.web3.call('getCandidate', c);
