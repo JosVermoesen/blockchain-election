@@ -53,14 +53,12 @@
 <section id="contract-info" class="bg-light text-center">
   <h3>Election Contract (web3 v4.11.0)</h3>
   <small>Powered By Sepolia Testnet on Angular 18.1</small>
-  <h5>** work in progress **</h5>
   @if (initialized) {
   <div class="container">
     <div>
       Hello, {{ myAddress }}
       <!-- Modal Button -->
-      @if (contractReady) { @if ((!isChairPerson
-      &&!canVote)) {
+      @if (contractReady) { @if ((!isChairPerson &&!canVote)) {
       <button
         type="button"
         class="btn btn-secondary"
@@ -83,11 +81,7 @@
       >
         Give permission to vote
       </button>
-      }
-      @if (hasVoted) {
-        you have voted already
-      }
-     }
+      } @if (hasVoted) { you have voted already } }
     </div>
   </div>
   <br />

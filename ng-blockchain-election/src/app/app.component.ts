@@ -80,7 +80,7 @@ export class AppComponent implements OnInit {
       ],
     });
 
-    this.ws.chairPersonIsUser().then((result) => {
+    this.es.chairPersonIsUser().then((result) => {
       this.isChairPerson = result;
     });
     this.chairPersonAddress = await this.ws.call('chairperson');
@@ -113,7 +113,7 @@ export class AppComponent implements OnInit {
   }
 
   async refresh() {
-    this.canVote = await this.es.canVote(
+    /* this.canVote = await this.es.canVote(
       '0xc8EdD419894Bb41738f9d1d91dE668b375F2624e'
     );
     console.log(
@@ -180,7 +180,7 @@ export class AppComponent implements OnInit {
 
     // back to the original address
     this.canVote = await this.es.canVote(this.myAddress);
-    this.hasVoted = await this.es.hasVoted(this.myAddress);
+    this.hasVoted = await this.es.hasVoted(this.myAddress); */
   }
 
   async givePermission() {

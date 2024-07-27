@@ -2,13 +2,13 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "stream": ["./node_modules/stream-browserify"],
+      /* "stream": ["./node_modules/stream-browserify"],
       "assert": ["./node_modules/assert"],
       "crypto": ["./node_modules/crypto-browserify"],
       "http": ["./node_modules/stream-http"],
       "https": ["./node_modules/https-browserify"],
       "os": ["./node_modules/os-browserify"],
-      "url": ["./node_modules/url"]
+      "url": ["./node_modules/url"] */
     },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",

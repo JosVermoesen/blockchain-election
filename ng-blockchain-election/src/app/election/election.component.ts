@@ -30,18 +30,11 @@ export class ElectionComponent implements OnInit {
     this.myAddress = await this.ws.getAccount();
     this.canVote = await this.es.canVote(this.myAddress);
     this.hasVoted = await this.es.hasVoted(this.myAddress);
-    this.isChairman = await this.ws.chairPersonIsUser();
   }
 
   async vote(candidateId: number | undefined) {
     this.ws.setContractReady(false);
-    console.log('vote', candidateId);
-
-    if (this.isChairman) {
-      this.toastr.error('Chairperson is not alowed to vote!');
-      this.ws.setContractReady(true);
-      return;
-    }
+    // console.log('vote', candidateId);
 
     if (!this.canVote) {
       this.toastr.warning('Ask permission to vote first!');
@@ -55,6 +48,9 @@ export class ElectionComponent implements OnInit {
       return;
     }
 
-    // await this.es.vote(candidateId);
+    const result = await this.es.voteFor(this.myAddress, candidateId as number);
+    console.log('voteFor', result);
+    this.toastr.success('Vote submitted!');
+    this.ws.setContractReady(true);
   }
 }

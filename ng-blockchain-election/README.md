@@ -82,48 +82,6 @@ global.Buffer = global.Buffer || Buffer;
 ],
 ```
 
-### 4. Angular 12+
-
-- `npm i stream-browserify`
-- `npm i assert`
-- `npm i crypto-browserify`
-- `npm i stream-http`
-- `npm i https-browserify`
-- `npm i os-browserify`
-- `npm i url`: see [node-url on github](https://github.com/defunctzombie/node-url#readme), [nodejs documentation](https://nodejs.org/api/url.html)
-
-- or just install all in one command stroke:
-  `npm i stream-browserify assert crypto-browserify stream-http https-browserify os-browserify url`
-
-#### add in tsconfig.json
-
-```json
-"compilerOptions": {
-    "paths": {
-      "stream": [
-        "./node_modules/stream-browserify"
-      ],
-      "assert": [
-        "./node_modules/assert"
-      ],
-      "crypto": [
-        "./node_modules/crypto-browserify"
-      ],
-      "http": [
-        "./node_modules/stream-http"
-      ],
-      "https": [
-        "./node_modules/https-browserify"
-      ],
-      "os": [
-        "./node_modules/os-browserify"
-      ],
-      "url": [
-        "./node_modules/url"
-      ],
-    },
-```
-
 ## Updating to latest Angular 18
 
 This app is on Angular 18.

@@ -4,8 +4,8 @@ export const environment = {
   apiUrl: 'https://rv-services.be/api/',
 
   // add your apiKeys for mail functionality
-  apiVsoftMailGuid: 'place here your api Key',
+  apiVsoftMailGuid: '5205fa57-766f-4af0-9207-d993d81d759b',
 
-  apiVsoftSendFromAddress: 'here your email to show to the mail receiver',
+  apiVsoftSendFromAddress: 'josvermoesen@rv.be',
   apiVsoftSendFromName: 'Election Contract DEMO',
 };

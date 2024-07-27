@@ -72,18 +72,7 @@ export class Web3Service {
   getAccount(): Promise<string> {
     return this.web3.eth.getAccounts().then((accounts) => accounts[0] || '');
   }
-
-  async chairPersonIsUser(): Promise<boolean> {
-    const chairperson = await this.call('chairperson');
-    const acc = await this.getAccount();
-
-    if (chairperson == acc) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
+  
   async executeTransaction(fnName: string, ...args: any[]): Promise<void> {
     this.setContractReady(false);
     const acc = await this.getAccount();
