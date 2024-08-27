@@ -1,6 +1,6 @@
 # Code Compile Test Deploy
 
-The way to code a solidity contract, compile it, test it and finally deploy it, is inspired from [Stephen Grider's]([https://nodejs.org/](https://www.udemy.com/user/sgslo/) course "Ethereum and Solidity: The Complete Developer's Guide"
+The way to code a solidity contract, compile it, test it and finally deploy it, is inspired from [Stephen Grider's](https://www.udemy.com/user/sgslo/) course "Ethereum and Solidity: The Complete Developer's Guide"
 
 ## Development Tools used for this app
 
